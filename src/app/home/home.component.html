@@ -84,7 +84,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngIf="!pageOfItems?.length > 0">
+                <tr *ngIf="pageOfItems?.length == 0">
                     <td colspan="7" class="text-center">No data found!</td>
                 </tr>
                 <tr
