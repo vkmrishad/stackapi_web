@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.json",
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
@@ -9,7 +10,6 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "allowJs": true,
     "importHelpers": true,
     "target": "es5",
     "typeRoots": [
@@ -19,5 +19,13 @@
       "es2018",
       "dom"
     ]
-  }
+  },
+  "include": [
+    "main.ts",
+    "polyfills.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
 }
