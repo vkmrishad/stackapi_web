@@ -2,8 +2,7 @@
     "name": "stack-exchange-search",
     "version": "1.0.0",
     "scripts": {
-        "start": "webpack-dev-server --mode development --open",
-        "postinstall": "ng build --aot -prod"
+        "start": "webpack-dev-server --mode development --open"
     },
     "license": "MIT",
     "dependencies": {
