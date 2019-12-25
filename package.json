@@ -1,7 +1,7 @@
 {
   "name": "stackapi-web",
   "version": "1.0.0",
-    "engines": {
+  "engines": {
     "node": "13.4.0",
     "npm": "6.13.4"
   },
@@ -37,6 +37,7 @@
     "@rxweb/reactive-form-validators": "^1.9.7",
     "@types/d3": "5.7.2",
     "core-js": "^2.6.11",
+    "express": "^4.17.1",
     "ngx-bootstrap": "5.1.2",
     "ngx-pagination": "^3.2.1",
     "ngx-ui-loader": "^7.2.2",
