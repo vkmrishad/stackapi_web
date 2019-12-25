@@ -9,6 +9,6 @@ export class SearchService {
 	constructor(private _http: HttpClient) {}
 
 	getSearchDetails(params?: any): Observable<any> {
-		return this._http.get('http://127.0.0.1:8000/api/v1/search', {params: params});
+		return this._http.get('https://stackapi-server.herokuapp.com/api/v1/search', {params: params});
     }
 }
