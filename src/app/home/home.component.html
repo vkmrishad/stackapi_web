@@ -1,0 +1,118 @@
+<div class="card text-center m-3">
+    <h3 class="card-header">Stack Exchange Search</h3>
+    <div class="card-body">
+        <form class="form-inline" [formGroup]="filterForm">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="form-group col-md-3">
+                        <label for="q" class="m-2">Search</label>
+                        <input type="text" class="form-control" formControlName="q" placeholder="Search Query">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="tagged" class="m-2">Tagged</label>
+                        <input type="text" class="form-control" formControlName="tagged" placeholder="Search Tag">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="title" class="m-2">Title</label>
+                        <input type="text" class="form-control" formControlName="title" placeholder="Search Title">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="body" class="m-2">Body</label>
+                        <input type="text" class="form-control" formControlName="body" placeholder="Search Body">
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="form-group col-md-2">
+                        <label for="pageSize" class="m-2">Page Size</label>
+                        <select class="form-control custom-select" formControlName="pageSize">
+                            <option selected value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="order" class="m-2">Order</label>
+                        <select class="form-control custom-select" formControlName="order">
+                            <option selected value="desc">desc</option>
+                            <option value="asc">asc</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="sort" class="m-2">Sort</label>
+                        <select class="form-control custom-select" formControlName="sort">
+                            <option selected value="activity">activity</option>
+                            <option value="votes">votes</option>
+                            <option value="creation">creation</option>
+                            <option value="relevance">relevance</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="fromdate" class="m-2">From</label>
+                        <input type="date" formControlName="fromdate" min="1000-01-01" max="3000-12-31" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="todate" class="m-2">To</label>
+                        <input type="date" formControlName="todate" min="1000-01-01" max="3000-12-31" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
+            <div class="col-md-12 float-right">
+                <div class="row float-right">
+                    <button type="button" class="btn btn-primary pull-right m-1" (click)="onSubmit()">Filter</button>
+                    <button type="button" class="btn btn-danger pull-right m-1" (click)="onReset()">Reset</button>
+                </div>
+            </div>
+        </form>
+        <br>
+        <table class="table table-responsive w-100 d-block d-md-table">
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">User</th>
+                    <th scope="col">Created</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Tags</th>
+                    <th scope="col">Views</th>
+                    <th scope="col">Answers</th>
+                    <th scope="col">Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="!pageOfItems?.length > 0">
+                    <td colspan="7" class="text-center">No data found!</td>
+                </tr>
+                <tr
+                    *ngFor="let item of pageOfItems | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: totalPages }">
+                    <td>
+                        <a href="{{item?.owner?.link}}" target="_blank">
+                            <img src="{{item?.owner?.profile_image}}" width="32"><br>
+                            {{item?.owner?.display_name}}
+                        </a>
+                    </td>
+                    <td>{{item?.creation_date * 1000 | date: 'medium' }}</td>
+                    <td><a href="{{item?.link}}" target="_blank">{{item?.title}}</a></td>
+                    <td>
+                        <ng-container *ngFor="let tag of item?.tags; let isLast=last">{{tag}}{{isLast ? '' : ', '}}
+                        </ng-container>
+                    </td>
+                    <td>{{item?.view_count}}</td>
+                    <td>{{item?.answer_count}}</td>
+                    <td>{{item?.score}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer pb-0 pt-3">
+        <pagination-controls (pageChange)="p = $event" (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)" maxSize="9" directionLinks="true" autoHide="true"
+            responsive="true" previousLabel="Previous" nextLabel="Next" screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page">
+        </pagination-controls>
+    </div>
+</div>
