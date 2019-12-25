@@ -1,6 +1,10 @@
 {
   "name": "stackapi-web",
   "version": "1.0.0",
+  "engines": {
+    "node": "13.4.0",
+    "npm": "6.13.4"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --configuration=local --host localhost --live-reload true",
